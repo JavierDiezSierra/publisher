@@ -32,12 +32,13 @@ def get_data(files, root):
 
 		# nc data
 		with netCDF4.Dataset(f) as ds:
-			if 'time' not in ds.variables:
+			if ds.frequency == "fx":
 				values = [np.nan] * 5
 			else:
 				time = ds.variables['time']
 				ncoords = time.size
 				units = time.units
+
 				value0 = time[0].data.item()
 				value1 = time[1].data.item()
 
