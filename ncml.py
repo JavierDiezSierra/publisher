@@ -13,12 +13,12 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import adapters
 
 def to_ncml(name, template, **kwargs):
-	templates = os.path.join(os.path.dirname(__file__), 'data')
+	templates = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'data')
 	env = Environment(loader=FileSystemLoader(templates), autoescape=select_autoescape(['xml']))
 
 	t = env.get_template(template)
 	with open(name, 'w+') as fh:
-		fh.write(t.render(**kwargs))
+		fh.write(t.render(**kwargs)) 
 
 	print(name)
 
