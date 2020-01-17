@@ -160,7 +160,7 @@ def main(args):
 		fxs.index = fxs.index.droplevel(0)
 
 		# hardcoded time values, only for monthly irregular datasets
-		if (df.loc[ncml].frequency == 'Amon').all():
+		if (df.loc[ncml].frequency.isin(['Amon', 'mon'])).all():
 			a_var = df.loc[ncml].index.get_level_values(level='variables')[0]
 			a_version = df.loc[ncml,a_var].index.get_level_values(level='versions')[-1]
 			time_values = get_time_values(df.loc[ncml, a_var, a_version])
